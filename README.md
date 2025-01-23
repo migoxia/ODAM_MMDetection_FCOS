@@ -5,17 +5,10 @@ This repository implements explanations for object detectors using object relati
 - make dir "./checkpoints", download corresponding FCOS weights from [FCOS](https://github.com/open-mmlab/mmdetection/tree/main/configs/fcos) based on the adopted config file, and put it into "./checkpoints".
 - make dir "./data", download MS COCO validation dataset and annotation file and put into "./data".
 - for Faster-RCNN, modify method extract_feat in module mmdet.models.detectors.two_stage:
--   def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
-        """Extract features.
-
-        Args:
-            batch_inputs (Tensor): Image tensor with shape (N, C, H ,W).
-
-        Returns:
-            tuple[Tensor]: Multi-level features that may have
-            different resolutions.
-        """
+```
+def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
         x = self.backbone(batch_inputs)
         if self.with_neck:
             x_after_neck = self.neck(x)
         return x,x_after_neck
+```
