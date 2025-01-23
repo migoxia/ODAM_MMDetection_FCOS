@@ -7,8 +7,8 @@ This repository implements explanations for object detectors using object relati
 - for Faster-RCNN, modify method extract_feat in module mmdet.models.detectors.two_stage:
 ```
 def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
-        x = self.backbone(batch_inputs)
-        if self.with_neck:
-            x_after_neck = self.neck(x)
-        return x,x_after_neck
+    x = self.backbone(batch_inputs)
+    if self.with_neck:
+    x_after_neck = self.neck(x)
+    return x,x_after_neck
 ```
