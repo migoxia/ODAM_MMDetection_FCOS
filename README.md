@@ -12,3 +12,26 @@ def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
     x_after_neck = self.neck(x)
     return x,x_after_neck
 ```
+- for DETR, modify python3.8/site-packages/torch/nn/modules/transformer.py:
+```
+# in TransformerDecoder.forward(), line 389
+cnt=1
+qs=[]
+ks=[]
+vs=[]
+for mod in self.layers:
+    output,q,k, sa_block_output = mod(output, src_mask=mask, is_causal=is_causal, src_key_padding_mask=src_key_padding_mask_for_layers)
+    qs.append(q)
+    ks.append(k)
+    vs.append(sa_block_output)
+   
+    cnt+=1
+
+if convert_to_nested:
+    output = output.to_padded_tensor(0., src.size())
+
+if self.norm is not None:
+    output = self.norm(output)
+
+return output,qs,ks,vs
+```
