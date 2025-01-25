@@ -14,7 +14,7 @@ def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
 ```
 - for DETR, modify python3.8/site-packages/torch/nn/modules/transformer.py:
 ```
-# in TransformerDecoder.forward(), line 389
+# in TransformerEncoder.forward(), line 389
 cnt=1
 qs=[]
 ks=[]
