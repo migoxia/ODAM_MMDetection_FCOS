@@ -9,7 +9,7 @@ This repository implements explanations for object detectors using object relati
 def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
     x = self.backbone(batch_inputs)
     if self.with_neck:
-    x_after_neck = self.neck(x)
+        x_after_neck = self.neck(x)
     return x,x_after_neck
 ```
 - for DETR, modify python3.8/site-packages/torch/nn/modules/transformer.py:
