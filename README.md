@@ -35,3 +35,18 @@ if self.norm is not None:
 
 return output,qs,ks,vs
 ```
+
+```
+# in TransformerEncoderLayer.forward(), line 718
+x = src
+q=x
+k=x
+if self.norm_first:
+    x = x + self._sa_block(self.norm1(x), src_mask, src_key_padding_mask, is_causal=is_causal)
+    x = x + self._ff_block(self.norm2(x))
+else:
+    sa_block_output=self._sa_block(x, src_mask, src_key_padding_mask, is_causal=is_causal)
+    x = self.norm1(x + sa_block_output)
+    x = self.norm2(x + self._ff_block(x))
+return x,q,k,sa_block_output
+```
