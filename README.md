@@ -12,7 +12,7 @@ def extract_feat(self, batch_inputs: Tensor) -> Tuple[Tensor]:
         x_after_neck = self.neck(x)
     return x,x_after_neck
 ```
-- for DETR, modify python3.8/site-packages/torch/nn/modules/transformer.py:
+- for DETR, modify torch/nn/modules/transformer.py:
 ```
 # in TransformerEncoder.forward(), line 389
 cnt=1
